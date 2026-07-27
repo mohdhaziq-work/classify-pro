@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassifyPro - AI-Powered HS Code Classification</title>
+    <meta name="description" content="Classify products into HS codes in seconds with 98% accuracy. Never overpay tariffs or face customs fines again.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .logo span {
+            color: #f97316;
+        }
+
+        nav a {
+            margin-left: 30px;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #1e3a8a;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #f97316;
+            color: white;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #1e3a8a;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #1e3a8a;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 80px 0;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #1e3a8a;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #1e3a8a;
+            color: white;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+
+        .step p {
+            color: #4a5568;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #1e3a8a;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #f97316;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: "MOST POPULAR";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f97316;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #1e3a8a;
+        }
+
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 20px 0;
+        }
+
+        .price span {
+            font-size: 18px;
+            color: #4a5568;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: #4a5568;
+        }
+
+        .pricing-features li::before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .pricing-button {
+            display: block;
+            background: #1e3a8a;
+            color: white;
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .pricing-button:hover {
+            background: #1e40af;
+        }
+
+        .pricing-card.featured .pricing-button {
+            background: #f97316;
+        }
+
+        .pricing-card.featured .pricing-button:hover {
+            background: #ea580c;
+        }
+
+        /* Waitlist Form */
+        .waitlist {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .waitlist h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .waitlist p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .waitlist-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .waitlist-form input {
+            flex: 1;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .waitlist-form button {
+            background: #f97316;
+            color: white;
+            padding: 16px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .waitlist-form button:hover {
+            background: #ea580c;
+        }
+
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .waitlist-form {
+                flex-direction: column;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Classify<span>Pro</span></div>
+                <nav>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#waitlist">Get Early Access</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered HS Code Classification<br>for Global Trade</h1>
+            <p>Classify products in seconds with 98% accuracy. Never overpay tariffs or face customs fines again.</p>
+            <a href="#waitlist" class="cta-button">Get Early Access →</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Why Choose ClassifyPro?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Get accurate HS code classifications in under 60 seconds. Upload product descriptions, images, or spec sheets and let our AI do the work.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>98% Accuracy</h3>
+                    <p>Built on WCO explanatory notes and thousands of customs rulings. Our AI provides legally defensible classifications with detailed reasoning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Save Money</h3>
+                    <p>Find the lowest legal tariff rate and identify trade agreement benefits (USMCA, EU FTA, etc.). Our customers save 5-15% on duties.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Compliance First</h3>
+                    <p>Every classification includes a detailed reasoning statement citing specific WCO notes and customs precedents. Audit-ready documentation.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Coverage</h3>
+                    <p>Support for 200+ countries and all major trade agreements. Classify for US HTS, EU TARIC, China HS, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔌</div>
+                    <h3>API-First</h3>
+                    <p>Integrate ClassifyPro into your existing workflow with our simple REST API. Perfect for freight forwarders, e-commerce platforms, and customs brokers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Upload Product Info</h3>
+                    <p>Provide product description, images, material composition, and intended use.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Analyzes</h3>
+                    <p>Our AI cross-references WCO notes, customs rulings, and trade agreements.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Results</h3>
+                    <p>Receive HS code, tariff rate, legal reasoning, and trade agreement benefits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$49<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>100 classifications/month</li>
+                        <li>Basic product descriptions</li>
+                        <li>Standard HS codes</li>
+                        <li>Email support</li>
+                        <li>PDF reports</li>
+                    </ul>
+                    <a href="#waitlist" class="pricing-button">Get Started</a>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Professional</h3>
+                    <div class="price">$199<span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>500 classifications/month</li>
+                        <li>Product images + specs</li>
+                        <li>Tariff optimization</li>
+                        <li>Trade agreement benefits</li>
+                        <li>API access</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <a href="#waitlist" class="pricing-button">Get Started</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">Custom</div>
+                    <ul class="pricing-features">
+                        <li>Unlimited classifications</li>
+                        <li>Bulk upload (CSV/Excel)</li>
+                        <li>Custom integrations</li>
+                        <li>Dedicated account manager</li>
+                        <li>SLA guarantee</li>
+                        <li>On-premise deployment</li>
+                    </ul>
+                    <a href="#waitlist" class="pricing-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist -->
+    <section class="waitlist" id="waitlist">
+        <div class="container">
+            <h2>Join the Waitlist</h2>
+            <p>Be the first to access ClassifyPro when we launch. Early adopters get 50% off for life.</p>
+            <form class="waitlist-form" id="waitlistForm">
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <button type="submit">Join Waitlist</button>
+            </form>
+            <div class="success-message" id="successMessage">
+                🎉 You're on the list! We'll notify you when ClassifyPro launches.
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 ClassifyPro. All rights reserved.</p>
+            <p style="margin-top: 10px; font-size: 14px;">AI-powered HS code classification for global trade compliance.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Waitlist form handling
+        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            
+            // Here you would normally send this to your backend
+            // For now, we'll just show a success message
+            console.log('Waitlist signup:', email);
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('waitlistForm').style.display = 'none';
+            
+            // Store in localStorage (for demo purposes)
+            const waitlist = JSON.parse(localStorage.getItem('classifypro_waitlist') || '[]');
+            waitlist.push({ email: email, timestamp: new Date().toISOString() });
+            localStorage.setItem('classifypro_waitlist', JSON.stringify(waitlist));
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a21d71254d050f3f',t:'MTc4NTE3NDE2MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
