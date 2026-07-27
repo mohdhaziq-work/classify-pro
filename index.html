@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClassifyPro - AI-Powered HS Code Classification</title>
-    <meta name="description" content="Classify products into HS codes in seconds with 98% accuracy. Never overpay tariffs or face customs fines again.">
+    <title>ClassifyPro — HS Code Classification, Automated</title>
+    <meta name="description" content="Stop guessing HS codes. ClassifyPro uses AI trained on 10,000+ customs rulings to deliver audit-ready classifications in 60 seconds.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,578 +15,970 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #525252;
+            --gray-800: #262626;
+            --accent: #ff4500;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
 
         /* Header */
         header {
-            background: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
         }
 
-        .header-content {
+        .header-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 24px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 20px;
             font-weight: 700;
-            color: #1e3a8a;
+            letter-spacing: -0.03em;
         }
 
-        .logo span {
-            color: #f97316;
+        nav {
+            display: flex;
+            gap: 48px;
+            align-items: center;
         }
 
         nav a {
-            margin-left: 30px;
             text-decoration: none;
-            color: #4a5568;
+            color: var(--gray-600);
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.2s;
         }
 
         nav a:hover {
-            color: #1e3a8a;
+            color: var(--black);
         }
 
-        /* Hero Section */
+        .nav-cta {
+            background: var(--black);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 500;
+        }
+
+        .nav-cta:hover {
+            background: var(--gray-800);
+            color: var(--white);
+        }
+
+        /* Hero */
         .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            padding: 100px 0;
-            text-align: center;
+            padding: 180px 0 120px;
+            position: relative;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 40px;
-            opacity: 0.95;
+        .hero-content h1 {
+            font-size: 72px;
+            line-height: 0.95;
+            margin-bottom: 32px;
+            letter-spacing: -0.04em;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: #f97316;
-            color: white;
-            padding: 16px 40px;
+        .hero-content h1 span {
+            display: block;
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .hero-content p {
             font-size: 18px;
-            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 40px;
+            max-width: 480px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--black);
+            color: var(--white);
+            padding: 16px 32px;
+            border-radius: 100px;
             text-decoration: none;
-            border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s;
         }
 
-        .cta-button:hover {
+        .hero-cta:hover {
+            background: var(--gray-800);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
         }
 
-        /* Features Section */
-        .features {
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.2s;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .hero-card {
+            position: absolute;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .hero-card-1 {
+            top: 0;
+            left: 0;
+            width: 320px;
+            transform: rotate(-2deg);
+        }
+
+        .hero-card-2 {
+            bottom: 40px;
+            right: 0;
+            width: 280px;
+            transform: rotate(3deg);
+        }
+
+        .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+        }
+
+        .card-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .card-code {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
             padding: 80px 0;
-            background: #f8fafc;
+            background: var(--black);
+            color: var(--white);
         }
 
-        .features h2 {
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat {
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #1e3a8a;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Problem Section */
+        .problem {
+            padding: 160px 0;
+            background: var(--gray-50);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: start;
+        }
+
+        .problem-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+
+        .problem h2 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            letter-spacing: -0.03em;
+        }
+
+        .problem-text {
+            font-size: 18px;
+            color: var(--gray-600);
+            line-height: 1.8;
+        }
+
+        .problem-list {
+            list-style: none;
+            margin-top: 48px;
+        }
+
+        .problem-list li {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .problem-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--white);
+        }
+
+        .problem-list strong {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .problem-list span {
+            color: var(--gray-600);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Solution Section */
+        .solution {
+            padding: 160px 0;
+        }
+
+        .solution-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .solution-header h2 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .solution-header p {
+            font-size: 18px;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        .solution-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .step {
+            padding: 48px 32px;
+            background: var(--gray-50);
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: var(--white);
+            border-color: var(--black);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 80px;
+            font-weight: 700;
+            color: var(--gray-200);
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -0.05em;
+        }
+
+        .step h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .step p {
+            color: var(--gray-600);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* Features */
+        .features {
+            padding: 160px 0;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .features-header h2 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .features-header p {
+            font-size: 18px;
+            color: var(--gray-400);
+            line-height: 1.7;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
         }
 
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+        .feature {
+            padding: 48px;
+            background: var(--gray-800);
+            border-radius: 16px;
+            border: 1px solid var(--gray-600);
+            transition: all 0.3s;
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .feature:hover {
+            border-color: var(--white);
+            transform: scale(1.02);
         }
 
         .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #1e3a8a;
-        }
-
-        .feature-card p {
-            color: #4a5568;
-            line-height: 1.8;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 80px 0;
-        }
-
-        .how-it-works h2 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #1e3a8a;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .step {
-            text-align: center;
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            background: #1e3a8a;
-            color: white;
-            border-radius: 50%;
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 60px;
-            margin-bottom: 20px;
-        }
-
-        .step h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #1e3a8a;
-        }
-
-        .step p {
-            color: #4a5568;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 80px 0;
-            background: #f8fafc;
-        }
-
-        .pricing h2 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 60px;
-            color: #1e3a8a;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .pricing-card {
-            background: white;
-            padding: 40px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-align: center;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
         }
 
-        .pricing-card.featured {
-            border: 3px solid #f97316;
-            transform: scale(1.05);
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--white);
         }
 
-        .pricing-card.featured::before {
-            content: "MOST POPULAR";
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #f97316;
-            color: white;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .pricing-card h3 {
+        .feature h3 {
             font-size: 24px;
-            margin-bottom: 10px;
-            color: #1e3a8a;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
         }
 
-        .price {
-            font-size: 48px;
-            font-weight: 700;
-            color: #1e3a8a;
-            margin: 20px 0;
+        .feature p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            font-size: 15px;
         }
 
-        .price span {
-            font-size: 18px;
-            color: #4a5568;
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 30px 0;
-            text-align: left;
-        }
-
-        .pricing-features li {
-            padding: 10px 0;
-            color: #4a5568;
-        }
-
-        .pricing-features li::before {
-            content: "✓ ";
-            color: #10b981;
-            font-weight: 700;
-            margin-right: 10px;
-        }
-
-        .pricing-button {
-            display: block;
-            background: #1e3a8a;
-            color: white;
-            padding: 14px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .pricing-button:hover {
-            background: #1e40af;
-        }
-
-        .pricing-card.featured .pricing-button {
-            background: #f97316;
-        }
-
-        .pricing-card.featured .pricing-button:hover {
-            background: #ea580c;
-        }
-
-        /* Waitlist Form */
-        .waitlist {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
+        /* CTA Section */
+        .cta {
+            padding: 160px 0;
             text-align: center;
+            background: var(--gray-50);
         }
 
-        .waitlist h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
+        .cta h2 {
+            font-size: 72px;
+            line-height: 1;
+            margin-bottom: 32px;
+            letter-spacing: -0.04em;
         }
 
-        .waitlist p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.95;
+        .cta p {
+            font-size: 20px;
+            color: var(--gray-600);
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
         }
 
-        .waitlist-form {
+        .cta-form {
             max-width: 500px;
             margin: 0 auto;
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .waitlist-form input {
+        .cta-form input {
             flex: 1;
-            padding: 16px;
+            padding: 16px 24px;
             font-size: 16px;
-            border: none;
-            border-radius: 8px;
+            border: 2px solid var(--gray-200);
+            border-radius: 100px;
+            font-family: inherit;
+            transition: border-color 0.2s;
         }
 
-        .waitlist-form button {
-            background: #f97316;
-            color: white;
-            padding: 16px 30px;
+        .cta-form input:focus {
+            outline: none;
+            border-color: var(--black);
+        }
+
+        .cta-form button {
+            background: var(--black);
+            color: var(--white);
+            padding: 16px 32px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             border: none;
-            border-radius: 8px;
+            border-radius: 100px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
-        .waitlist-form button:hover {
-            background: #ea580c;
+        .cta-form button:hover {
+            background: var(--gray-800);
+            transform: translateY(-2px);
         }
 
-        .success-message {
+        .success-msg {
             display: none;
-            background: #10b981;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            margin-top: 24px;
+            padding: 16px 24px;
+            background: var(--black);
+            color: var(--white);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
         }
 
         /* Footer */
         footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 40px 0;
-            text-align: center;
+            padding: 80px 0 40px;
+            background: var(--black);
+            color: var(--white);
         }
 
-        footer p {
-            opacity: 0.8;
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-brand p {
+            color: var(--gray-400);
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        .footer-col h4 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            color: var(--gray-400);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--gray-400);
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid var(--gray-800);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--gray-400);
         }
 
         /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 56px;
+            }
+
+            .problem h2,
+            .solution-header h2,
+            .features-header h2,
+            .cta h2 {
+                font-size: 48px;
+            }
+
+            .hero-grid,
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-visual {
+                height: 400px;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 32px;
+            .container {
+                padding: 0 24px;
             }
 
-            .hero p {
-                font-size: 16px;
+            nav {
+                gap: 24px;
             }
 
-            .waitlist-form {
+            nav a:not(.nav-cta) {
+                display: none;
+            }
+
+            .hero {
+                padding: 140px 0 80px;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .stat-number {
+                font-size: 48px;
+            }
+
+            .problem h2,
+            .solution-header h2,
+            .features-header h2,
+            .cta h2 {
+                font-size: 36px;
+            }
+
+            .solution-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-form {
                 flex-direction: column;
             }
 
-            .pricing-card.featured {
-                transform: scale(1);
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
-            <div class="header-content">
-                <div class="logo">Classify<span>Pro</span></div>
+            <div class="header-inner">
+                <div class="logo">ClassifyPro</div>
                 <nav>
+                    <a href="#problem">Problem</a>
+                    <a href="#solution">Solution</a>
                     <a href="#features">Features</a>
-                    <a href="#how-it-works">How It Works</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#waitlist">Get Early Access</a>
+                    <a href="#cta" class="nav-cta">Get Early Access</a>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>AI-Powered HS Code Classification<br>for Global Trade</h1>
-            <p>Classify products in seconds with 98% accuracy. Never overpay tariffs or face customs fines again.</p>
-            <a href="#waitlist" class="cta-button">Get Early Access →</a>
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>
+                        HS codes,
+                        <span>classified in 60 seconds.</span>
+                    </h1>
+                    <p>Stop wasting hours on manual HTS searches. ClassifyPro uses AI trained on 10,000+ customs rulings to deliver audit-ready classifications with full legal reasoning.</p>
+                    <a href="#cta" class="hero-cta">
+                        Join the waitlist
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card hero-card-1">
+                        <div class="card-label">HS Code</div>
+                        <div class="card-code">7323.93.0045</div>
+                        <div style="margin-top: 16px; font-size: 14px; color: var(--gray-600);">
+                            Stainless steel water bottle with bamboo lid
+                        </div>
+                    </div>
+                    <div class="hero-card hero-card-2">
+                        <div class="card-label">Confidence</div>
+                        <div class="card-value">96%</div>
+                        <div style="margin-top: 8px; font-size: 13px; color: var(--gray-600);">
+                            Based on 847 similar rulings
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">60s</div>
+                    <div class="stat-label">Avg Time</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Rulings</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-grid">
+                <div>
+                    <div class="problem-label">The Problem</div>
+                    <h2>Manual classification is slow, expensive, and risky.</h2>
+                    <p class="problem-text">
+                        Customs brokers spend 15-20 minutes per classification. One wrong code can mean 20% extra duties or seized shipments. And audits? They're getting more aggressive every year.
+                    </p>
+                </div>
+                <div>
+                    <ul class="problem-list">
+                        <li>
+                            <div class="problem-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Time-consuming</strong>
+                                <span>15-20 minutes per product. Multiply that by 100 shipments/month.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="problem-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Expensive mistakes</strong>
+                                <span>Wrong code = 20% extra duties or $50K+ in fines. One typo costs thousands.</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="problem-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <strong>Audit nightmares</strong>
+                                <span>No documentation? No defense. Customs wants proof, not guesses.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution" id="solution">
+        <div class="container">
+            <div class="solution-header">
+                <div class="problem-label">The Solution</div>
+                <h2>AI that thinks like a customs expert.</h2>
+                <p>ClassifyPro cross-references WCO explanatory notes, 10,000+ customs rulings, and trade agreements to deliver classifications with full legal reasoning.</p>
+            </div>
+            <div class="solution-steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>Upload</h3>
+                    <p>Drop product descriptions, images, or spec sheets. We accept PDFs, CSVs, and plain text.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>Analyze</h3>
+                    <p>Our AI cross-references WCO notes, customs rulings, and trade agreements in seconds.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>Classify</h3>
+                    <p>Get HS code, tariff rate, legal reasoning, and trade agreement benefits. Audit-ready.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="features" id="features">
         <div class="container">
-            <h2>Why Choose ClassifyPro?</h2>
+            <div class="features-header">
+                <div class="problem-label" style="color: var(--gray-400);">Features</div>
+                <h2>Built for compliance, not convenience.</h2>
+                <p>Every feature designed to pass audits and save money.</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Lightning Fast</h3>
-                    <p>Get accurate HS code classifications in under 60 seconds. Upload product descriptions, images, or spec sheets and let our AI do the work.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
                     <h3>98% Accuracy</h3>
-                    <p>Built on WCO explanatory notes and thousands of customs rulings. Our AI provides legally defensible classifications with detailed reasoning.</p>
+                    <p>Trained on 10,000+ customs rulings and WCO explanatory notes. Every classification includes confidence score and legal citations.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Save Money</h3>
-                    <p>Find the lowest legal tariff rate and identify trade agreement benefits (USMCA, EU FTA, etc.). Our customers save 5-15% on duties.</p>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3>60-Second Results</h3>
+                    <p>From upload to audit-ready report in under a minute. What takes humans 20 minutes, we do in 60 seconds.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Compliance First</h3>
-                    <p>Every classification includes a detailed reasoning statement citing specific WCO notes and customs precedents. Audit-ready documentation.</p>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Full Legal Reasoning</h3>
+                    <p>Every classification includes detailed reasoning citing specific WCO notes, GRIs, and customs precedents. Ready for any audit.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Global Coverage</h3>
-                    <p>Support for 200+ countries and all major trade agreements. Classify for US HTS, EU TARIC, China HS, and more.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔌</div>
-                    <h3>API-First</h3>
-                    <p>Integrate ClassifyPro into your existing workflow with our simple REST API. Perfect for freight forwarders, e-commerce platforms, and customs brokers.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Upload Product Info</h3>
-                    <p>Provide product description, images, material composition, and intended use.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>AI Analyzes</h3>
-                    <p>Our AI cross-references WCO notes, customs rulings, and trade agreements.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Get Results</h3>
-                    <p>Receive HS code, tariff rate, legal reasoning, and trade agreement benefits.</p>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3>Tariff Optimization</h3>
+                    <p>We find the lowest legal tariff rate and identify trade agreement benefits. Customers save 5-15% on duties.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
+    <section class="cta" id="cta">
         <div class="container">
-            <h2>Simple, Transparent Pricing</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">$49<span>/month</span></div>
-                    <ul class="pricing-features">
-                        <li>100 classifications/month</li>
-                        <li>Basic product descriptions</li>
-                        <li>Standard HS codes</li>
-                        <li>Email support</li>
-                        <li>PDF reports</li>
-                    </ul>
-                    <a href="#waitlist" class="pricing-button">Get Started</a>
-                </div>
-                <div class="pricing-card featured">
-                    <h3>Professional</h3>
-                    <div class="price">$199<span>/month</span></div>
-                    <ul class="pricing-features">
-                        <li>500 classifications/month</li>
-                        <li>Product images + specs</li>
-                        <li>Tariff optimization</li>
-                        <li>Trade agreement benefits</li>
-                        <li>API access</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <a href="#waitlist" class="pricing-button">Get Started</a>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">Custom</div>
-                    <ul class="pricing-features">
-                        <li>Unlimited classifications</li>
-                        <li>Bulk upload (CSV/Excel)</li>
-                        <li>Custom integrations</li>
-                        <li>Dedicated account manager</li>
-                        <li>SLA guarantee</li>
-                        <li>On-premise deployment</li>
-                    </ul>
-                    <a href="#waitlist" class="pricing-button">Contact Sales</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Waitlist -->
-    <section class="waitlist" id="waitlist">
-        <div class="container">
-            <h2>Join the Waitlist</h2>
-            <p>Be the first to access ClassifyPro when we launch. Early adopters get 50% off for life.</p>
-            <form class="waitlist-form" id="waitlistForm">
-                <input type="email" id="email" placeholder="Enter your email" required>
-                <button type="submit">Join Waitlist</button>
+            <h2>Ready to stop guessing?</h2>
+            <p>Join 50+ customs brokers and freight forwarders already on the waitlist. Early access opens Q1 2026.</p>
+            <form class="cta-form" id="ctaForm">
+                <input type="email" placeholder="you@company.com" required>
+                <button type="submit">Join waitlist</button>
             </form>
-            <div class="success-message" id="successMessage">
-                🎉 You're on the list! We'll notify you when ClassifyPro launches.
+            <div class="success-msg" id="successMsg">
+                ✓ You're on the list. We'll email you when early access opens.
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 ClassifyPro. All rights reserved.</p>
-            <p style="margin-top: 10px; font-size: 14px;">AI-powered HS code classification for global trade compliance.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>ClassifyPro</h3>
+                    <p>AI-powered HS code classification for global trade. Built by customs experts, for customs experts.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#solution">How it works</a></li>
+                        <li><a href="#cta">Early access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 ClassifyPro. All rights reserved.</div>
+                <div>Made for customs brokers, freight forwarders, and trade compliance teams.</div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Waitlist form handling
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            
-            // Here you would normally send this to your backend
-            // For now, we'll just show a success message
-            console.log('Waitlist signup:', email);
-            
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('waitlistForm').style.display = 'none';
-            
-            // Store in localStorage (for demo purposes)
-            const waitlist = JSON.parse(localStorage.getItem('classifypro_waitlist') || '[]');
-            waitlist.push({ email: email, timestamp: new Date().toISOString() });
-            localStorage.setItem('classifypro_waitlist', JSON.stringify(waitlist));
-        });
-
-        // Smooth scrolling for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // Form handling
+        document.getElementById('ctaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            console.log('Waitlist signup:', email);
+            
+            this.style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+            
+            const waitlist = JSON.parse(localStorage.getItem('classifypro_waitlist') || '[]');
+            waitlist.push({ email: email, timestamp: new Date().toISOString() });
+            localStorage.setItem('classifypro_waitlist', JSON.stringify(waitlist));
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a21d71254d050f3f',t:'MTc4NTE3NDE2MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
